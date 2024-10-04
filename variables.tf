@@ -65,6 +65,7 @@ variable "invite_email_message_path" {
 
 variable "invite_sms_message" {
   description = "SMS message template. Must contain the {####} placeholder."
+  type        = string
 }
 
 variable "user_pool_schemas" {

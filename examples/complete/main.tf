@@ -1,5 +1,3 @@
-variable "hosted_zone_name" {}
-
 locals {
   prefix      = "complete"
   identifier  = random_id.this.hex
@@ -59,4 +57,19 @@ provider "aws" {
 provider "aws" {
   alias  = "us_east_1"
   region = "us-east-1"
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3"
+    }
+  }
+
+  required_version = "~> 1"
 }
