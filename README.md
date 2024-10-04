@@ -9,8 +9,8 @@ Terraform module that is in charge of creating a usable cognito user pool and id
   - given_name
   - family_name
 - Set up the user pool for verification of a new user via email and with a invite message via email.
-- Create a custom domain (with its certificate) for the user pool in the form of: 
-    
+- Create a custom domain (with its certificate) for the user pool in the form of:
+
     ```txt
     auth.<environment>.<prefix>.<base_domain>
     ```
