@@ -1,0 +1,5 @@
+Hello {username},
+
+Please, confirm your email by following this link:
+
+{##Click Here##}

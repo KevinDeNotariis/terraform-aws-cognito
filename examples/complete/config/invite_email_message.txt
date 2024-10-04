@@ -1,0 +1,9 @@
+Hello {username},
+
+Thank you for joining the Jungle!
+
+the following is a one-time password:
+
+{####}
+
+After the first successful login, you will be asked to change the password.
