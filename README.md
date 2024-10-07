@@ -18,7 +18,7 @@ Terraform module that is in charge of creating a usable cognito user pool and id
 - Create an identity pool which will allow to assign AWS permissions on user logged in (or not logged in)
 - Extract the groups and users to be created from two distinct YAML files.
 - Save in SSM Paramater store the client-id of the user pool client.
-- 
+-
 ## Requirements
 
 | Name | Version |
