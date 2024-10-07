@@ -42,21 +42,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create provider file
-        uses: 1arp/create-a-file-action@0.4.5
-        with:
-          path: '.'
-          isAbsolutePath: false
-          file: 'provider_auto_generated.tf'
-          content: |
-            provider "aws" {
-              region = "eu-west-1"
-            }
-            provider "aws" { 
-              alias = "us_east_1"
-              region = "us-east-1"
-            }
-
       - name: Terraform min/max versions
         id: minMax
         uses: clowdhaus/terraform-min-max@v1.3.0
