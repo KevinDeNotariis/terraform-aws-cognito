@@ -110,6 +110,12 @@ variable "explicit_auth_flows" {
   ]
 }
 
+variable "create_dummy_record" {
+  description = "Whether to create a dummy record for the user pool domain to be correctly created the first time. This is necessary when first creating the user pool domain, after that, this variable can be set to false to destroy the dummy record"
+  type        = bool
+  default     = true
+}
+
 variable "iam_cognito_unauthenticated_user_policy_json" {
   description = "Json policy that will be associated with an unauthenticated user at identity pool level"
   type        = string

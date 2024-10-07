@@ -152,6 +152,8 @@ resource "aws_cognito_user_pool_domain" "this" {
 }
 
 resource "aws_route53_record" "dummy" {
+  count = var.create_dummy_record ? 1 : 0
+
   name    = local.cognito_root_domain
   type    = "A"
   zone_id = var.hosted_zone_id
@@ -201,6 +203,9 @@ resource "aws_cognito_identity_pool" "this" {
   }
 }
 
+#====================================================================================
+# Iam roles that the authenticated and unauthenticated user will have
+#====================================================================================
 data "aws_iam_policy_document" "cognito_assume" {
   statement {
     effect = "Allow"
