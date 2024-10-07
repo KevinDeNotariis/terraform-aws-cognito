@@ -12,6 +12,24 @@ resource "random_id" "this" {
   byte_length = 4
 }
 
+data "aws_iam_policy_document" "cognito_authenticated" {
+  statement {
+    actions   = ["kinesis:PutRecords"]
+    resources = ["*"]
+  }
+  statement {
+    actions   = ["rum:PutRumEvents"]
+    resources = ["*"]
+  }
+}
+
+data "aws_iam_policy_document" "cognito_unauthenticated" {
+  statement {
+    actions   = ["rum:PutRumEvents"]
+    resources = ["*"]
+  }
+}
+
 module "cognito" {
   source = "../.."
 
@@ -27,12 +45,25 @@ module "cognito" {
   user_pool_client_callback_urls = ["http://localhost:3000/"]
   user_pool_client_logout_urls   = ["http://localhost:3000/"]
 
+  supported_identity_provider = ["COGNITO"]
+  oauth_flows                 = ["code", "implicit"]
+  oauth_scopes                = ["email", "openid", "profile"]
+  explicit_auth_flows = [
+    "ALLOW_REFRESH_TOKEN_AUTH",
+    "ALLOW_USER_SRP_AUTH"
+  ]
+
   verification_email_subject_by_link      = "Jungle - Email Confirmation"
   verification_email_message_by_link_path = "${path.module}/config/verification_email_message.txt"
 
   invite_email_subject      = "Welcome to the Jungle"
   invite_email_message_path = "${path.module}/config/invite_email_message.txt"
   invite_sms_message        = "Hello {username}, please sign up at: {####}"
+
+  iam_cognito_authenticated_user_policy_json   = data.aws_iam_policy_document.cognito_authenticated.json
+  iam_cognito_unauthenticated_user_policy_json = data.aws_iam_policy_document.cognito_unauthenticated.json
+
+  create_dummy_record = true
 
   user_pool_schemas = [
     {

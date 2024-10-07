@@ -87,7 +87,7 @@ variable "oauth_flows" {
   default     = ["code", "implicit"]
 }
 
-variable "oath_scopes" {
+variable "oauth_scopes" {
   description = "List of allowed OAuth scopes, including phone, email, openid, profile, and aws.cognito.signin.user.admin"
   type        = list(string)
   default     = ["email", "openid", "profile"]
