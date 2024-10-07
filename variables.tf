@@ -65,6 +65,7 @@ variable "invite_email_message_path" {
 
 variable "invite_sms_message" {
   description = "SMS message template. Must contain the {####} placeholder."
+  type        = string
 }
 
 variable "user_pool_schemas" {
@@ -107,6 +108,12 @@ variable "explicit_auth_flows" {
     "ALLOW_REFRESH_TOKEN_AUTH",
     "ALLOW_USER_SRP_AUTH"
   ]
+}
+
+variable "create_dummy_record" {
+  description = "Whether to create a dummy record for the user pool domain to be correctly created the first time. This is necessary when first creating the user pool domain, after that, this variable can be set to false to destroy the dummy record"
+  type        = bool
+  default     = true
 }
 
 variable "iam_cognito_unauthenticated_user_policy_json" {
