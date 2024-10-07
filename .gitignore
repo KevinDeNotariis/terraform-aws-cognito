@@ -35,6 +35,3 @@ __pycache__/
 
 # Test directories
 .tox
-
-# Remove auto generated code
-*_auto_generated.tf
