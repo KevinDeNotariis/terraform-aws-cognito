@@ -2,7 +2,7 @@
 # User Pool
 #====================================================================================
 resource "aws_cognito_user_pool" "this" {
-  name = "${var.prefix}-${var.identifier}"
+  name = "${var.prefix}-${var.environment}-${var.identifier}"
 
   auto_verified_attributes = ["email"]
   verification_message_template {
@@ -72,6 +72,19 @@ resource "aws_cognito_user_pool" "this" {
     developer_only_attribute = false
     mutable                  = false
     required                 = true
+
+    string_attribute_constraints {
+      min_length = 2
+      max_length = 255
+    }
+  }
+
+  schema {
+    name                     = "id"
+    attribute_data_type      = "String"
+    developer_only_attribute = false
+    mutable                  = false
+    required                 = false
 
     string_attribute_constraints {
       min_length = 2
@@ -330,12 +343,19 @@ resource "aws_cognito_user" "this" {
   user_pool_id = aws_cognito_user_pool.this.id
   username     = each.key
 
-  attributes = {
-    email          = each.value.email
-    given_name     = each.value.given_name
-    family_name    = each.value.family_name
-    id             = random_uuid.this[each.key].result
-    email_verified = true
+  attributes = merge(
+    {
+      email          = each.value.email
+      given_name     = each.value.given_name
+      family_name    = each.value.family_name
+      id             = random_uuid.this[each.key].result
+      email_verified = false
+    },
+    each.value.additional_attributes
+  )
+
+  lifecycle {
+    ignore_changes = [attributes.email_verified]
   }
 }
 
