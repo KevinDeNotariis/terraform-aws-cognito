@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1](https://github.com/KevinDeNotariis/terraform-aws-cognito/compare/v2.0.0...v2.0.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* Correctly add the chance of passing the additional attributes of a cognito user. Make the presence of 'id' a default one. ([5456828](https://github.com/KevinDeNotariis/terraform-aws-cognito/commit/545682863b0d8203abfd21c751572b9c1141741b))
+
 ## [2.0.0](https://github.com/KevinDeNotariis/terraform-aws-cognito/compare/v1.0.0...v2.0.0) (2024-10-07)
 
 
