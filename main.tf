@@ -351,7 +351,7 @@ resource "aws_cognito_user" "this" {
       id             = random_uuid.this[each.key].result
       email_verified = false
     },
-    each.value.additional_attributes
+    lookup(each.value, "additional_attributes", {})
   )
 
   lifecycle {
