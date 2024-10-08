@@ -2,6 +2,8 @@ example@hello.world:
     given_name: Example
     family_name: Hello
     email: example@hello.world
+    additional_attributes:
+        department: IT
     groups:
         - admin
 
@@ -9,5 +11,7 @@ user@user.com:
     given_name: user
     family_name: userly
     email: user@user.com
+    additional_attributes:
+        department: Finance
     groups:
         - user

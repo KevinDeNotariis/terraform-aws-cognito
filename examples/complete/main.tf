@@ -67,7 +67,7 @@ module "cognito" {
 
   user_pool_schemas = [
     {
-      name                     = "id"
+      name                     = "department"
       attribute_data_type      = "String"
       developer_only_attribute = false
       mutable                  = false
